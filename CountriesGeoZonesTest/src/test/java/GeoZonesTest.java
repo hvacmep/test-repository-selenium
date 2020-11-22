@@ -42,12 +42,13 @@ public class GeoZonesTest {
             String element = "'" + i + "'";
             String homie = MessageFormat.format("//*[text()={0}]", element);
             driver.findElement(By.xpath(homie)).click();
-            List<WebElement> InnerZones = driver.findElements(By.xpath("//*[contains(@name, 'zone_code')]"));
+            List<WebElement> InnerZones = driver.findElements(By.xpath("//select[contains(@name, 'zone_code')]/option[@selected = 'selected']"));
             List<String> StringsZones = new ArrayList<String>(Collections.<String>emptyList());
 
             for (WebElement e : InnerZones) {
                 StringsZones.add(e.getText());
             }
+
             List<String> InnerZonesNamesSorted = new ArrayList<String>(Collections.<String>emptyList());
             InnerZonesNamesSorted.addAll(StringsZones);
             Collections.sort(InnerZonesNamesSorted);
