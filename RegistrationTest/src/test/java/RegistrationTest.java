@@ -2,12 +2,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class RegistrationTest {
     private WebDriver driver;
@@ -21,20 +25,28 @@ public class RegistrationTest {
     }
 
     @Test
-    public void RegistrationTest () throws InterruptedException {
+    public void Registration () throws InterruptedException {
 
         driver.navigate().to("http://localhost/litecart/en/");
         driver.findElement(By.xpath("//*[@href = 'http://localhost/litecart/en/create_account']")).click();
+        Thread.sleep(500);
         driver.findElement(By.xpath("//input[@name = 'firstname']")).sendKeys("Ivan");
         driver.findElement(By.xpath("//input[@name = 'lastname']")).sendKeys("Ivanov");
         driver.findElement(By.xpath("//input[@name = 'address1']")).sendKeys("799-701, N Linden Dr");
         driver.findElement(By.xpath("//input[@name = 'postcode']")).sendKeys("90210");
         driver.findElement(By.xpath("//input[@name = 'city']")).sendKeys("Beverly Hills");
 
-        Select drpCountry = new Select (driver.findElement(By.name("country_code")));
-        drpCountry.selectByVisibleText("United States");
+        driver.findElement(By.xpath("//span[@class = 'select2-selection__arrow']")).click();
+        driver.findElement(By.xpath("//input[@class = 'select2-search__field']"));
+        wait.until(visibilityOfElementLocated(By.xpath("//input[@class = 'select2-search__field']")));
+        Actions builder = new Actions(driver);
+        builder
+                .sendKeys("United States")
+                .sendKeys(Keys.ENTER)
+                .build()
+                .perform();
 
-        Select drpState = new Select (driver.findElement(By.xpath("//select[contains(@name, 'zone_code')]")));
+        Select drpState = new Select(driver.findElement(By.xpath("//select[contains(@name, 'zone_code')]")));
         Thread.sleep(500);
         drpState.selectByVisibleText("California");
 
