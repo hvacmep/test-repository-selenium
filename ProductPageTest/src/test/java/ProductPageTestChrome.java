@@ -30,8 +30,9 @@ public class ProductPageTestChrome {
         String MainPageCampaign = driver.findElement(By.className("campaign-price")).getText();
         String RegularColor = driver.findElement(By.className("regular-price")).getCssValue("color");
         String CampaignColor = driver.findElement(By.className("campaign-price")).getCssValue("color");
-        Integer rph = driver.findElement(By.className("regular-price")).getSize().getHeight();
-        Integer cph = driver.findElement(By.className("campaign-price")).getSize().getHeight();
+        Float rph = Float.parseFloat(driver.findElement(By.className("regular-price")).getCssValue("font-size").replace("px", ""));
+        Float cph = Float.parseFloat(driver.findElement(By.className("campaign-price")).getCssValue("font-size").replace("px", ""));
+
     if (rph < cph ) {
         System.out.println("Text size ok");
     }
@@ -87,8 +88,8 @@ public class ProductPageTestChrome {
         System.out.println(NotMainPageName);
         System.out.println("Font weight second page:" + driver.findElement(By.className("campaign-price")).getCssValue("font-weight"));
         System.out.println("Text decoration second page:" + driver.findElement(By.className("regular-price")).getCssValue("text-decoration"));
-        Integer rphn =   driver.findElement(By.className("regular-price")).getSize().getHeight();
-        Integer cphn = driver.findElement(By.className("campaign-price")).getSize().getHeight();
+        Float rphn = Float.parseFloat(driver.findElement(By.className("regular-price")).getCssValue("font-size").replace("px", ""));
+        Float cphn = Float.parseFloat(driver.findElement(By.className("campaign-price")).getCssValue("font-size").replace("px", ""));
         if (rphn < cphn ) {
             System.out.println("Text size ok");
         }
