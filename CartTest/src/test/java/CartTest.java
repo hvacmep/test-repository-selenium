@@ -58,16 +58,11 @@ public class CartTest {
 
         Thread.sleep(500);
 
-        for (int i = 0; i < 3; i++) {
-            if (isElementPresent(By.xpath("//*[@class = 'dataTable rounded-corners']"))) {
-                WebElement OrderSummary = driver.findElement(By.xpath("//*[@class = 'dataTable rounded-corners']"));
-                List<WebElement> OrderSummaryItems = OrderSummary.findElements(By.tagName("tr"));
-                driver.findElement(By.xpath("//button[@name = 'remove_cart_item']")).click();
-                wait.until(ExpectedConditions.stalenessOf(OrderSummaryItems.get(1)));
-            }
-            else {
-                ;
-            }
+        while (isElementPresent(By.xpath("//*[@class = 'dataTable rounded-corners']"))) {
+            WebElement OrderSummary = driver.findElement(By.xpath("//*[@class = 'dataTable rounded-corners']"));
+            List<WebElement> OrderSummaryItems = OrderSummary.findElements(By.tagName("tr"));
+            driver.findElement(By.xpath("//button[@name = 'remove_cart_item']")).click();
+            wait.until(ExpectedConditions.stalenessOf(OrderSummaryItems.get(1)));
         }
     }
 
