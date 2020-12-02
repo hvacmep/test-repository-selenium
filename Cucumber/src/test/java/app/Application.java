@@ -30,8 +30,8 @@ public class Application {
        driver.quit();
     }
 
-    public void addProductsToCart() throws InterruptedException {
-        for (int i = 1; i < 4; i++) {
+    public void addProductsToCart(int quantity) throws InterruptedException {
+        for (int i = 1; i < quantity; i++) {
             litecartMainPage.open();
             Thread.sleep(500);
 
@@ -45,6 +45,11 @@ public class Application {
             wait.until(textToBePresentInElement(productPage.quantityInCart, textLocator));
         }
     }
+
+    public int getProductsInCartQuantity() {
+        return (Integer.parseInt(productPage.quantityInCart.getAttribute("textContent")));
+    }
+
     public void removeProductsFromCart() throws InterruptedException {
         productPage.checkOut.click();
 
@@ -53,5 +58,9 @@ public class Application {
         Thread.sleep(500);
 
         cartPage.clearCart ();
+    }
+
+    public boolean checkCartIsEmpty() {
+        return (cartPage.cartIsEmpty());
     }
 }

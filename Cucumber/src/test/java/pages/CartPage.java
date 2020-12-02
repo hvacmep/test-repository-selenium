@@ -28,4 +28,13 @@ public class CartPage extends Page {
             wait.until(ExpectedConditions.stalenessOf(orderSummaryItems.get(1)));
         }
     }
+
+    public boolean cartIsEmpty () {
+        if (isElementPresent(By.xpath("//*[@id = 'box-checkout-cart']/div[@class = 'viewport']"))) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }
